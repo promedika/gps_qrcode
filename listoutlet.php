@@ -7,6 +7,7 @@ $result = mysqli_query($conn,"SELECT * FROM tbl_rs");
  <head>
    <title> Retrive data</title>
    <link href="bootstrap-5.1.3-dist/css/bootstrap.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
    <style>
 	#myInput {
   background-image: url('/css/searchicon.png'); /* Add a search icon to input */
@@ -44,13 +45,15 @@ if (mysqli_num_rows($result) > 0) {
 	<div class="container">
 <a href="inputrs.php" class="btn btn-warning" style="color: #ffffff;background-color: #ff8e3c;margin-bottom:10px">Input Outlet Baru</a>	
 <a href="index.php" class="btn btn-warning" style="color: #ffffff;background-color: #ff8e3c;margin-bottom:10px;float:right">Kembali</a><br>
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 <table id="tblrs" class="table table-striped">
-	  <tr>
+  <thead>	  
+    <tr>
 	    <td>ID Outlet</td>
-		<td>Nama Outlet</td>
-        <td>Action</td>
+		  <td>Nama Outlet</td>
+      <td>Action</td>
 	  </tr>
+  </thead>
+  <tbody>
 			<?php
 			$i=0;
 			while($row = mysqli_fetch_array($result)) {
@@ -64,28 +67,14 @@ if (mysqli_num_rows($result) > 0) {
 			$i++;
 			}
 			?>
+  </tbody>
 </table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 <script>
-function myFunction() {
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("tblrs");
-  tr = table.getElementsByTagName("tr");
-  for (i = 0; i < tr.length; i++) {
-	//ganti ke 0 untuk pencarian melalui id | ganti ke 1 untuk pencarian melalui nama
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-}
-
+  $(document).ready( function () {
+    $('#tblrs').DataTable();
+} );
 </script>
 	</div>
 </div>
