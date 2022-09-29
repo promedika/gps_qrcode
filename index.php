@@ -9,7 +9,8 @@
     if ($result) {
         while($row = $result->fetch_assoc()) {
             $row['tr_id'] = str_pad($row['tr_id'],4,"0",STR_PAD_LEFT);
-            $row['tr_code'] = $row['tr_code']+1;
+            $tr_code = $row['tr_code']+1;
+            $row['tr_code'] = $tr_code != 1 ? $tr_code : date('Ymd').$row['tr_id'].'00001';
             $data[] = $row;
         }
     }
@@ -94,7 +95,14 @@
                     </div>
                     <div class="col-md-8">
                         <select id="inputNama" class="form-control" name="outlet">
-                            <option></option>
+                            <option></option> 
+                            <?php 
+                            foreach ($data as $key => $value) {
+                                $val = $value['tr_id']."|".$value['tr_code'];
+                                $name = $value['tr_name'];
+                                echo '<option value="'.$val.'">'.$name.'</option>';
+                            }
+                            ?>
                         </select>
                         <input type="hidden" class="nama-rs" name="nama"> 
                     </div>
@@ -127,18 +135,6 @@
     <script>
         var days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
         var months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-        var response = <?php echo json_encode($data);?>;
-
-        if (response) {
-            response.forEach(function(item){
-                var option = document.createElement('option');
-                option.value = item.tr_id +'|'+ item.tr_code;
-                option.innerHTML = item.tr_name;
-                document.getElementById("inputNama").appendChild(option);
-                // $('#inputNama').data('tr_code',item.tr_code);
-            })
-            
-        }
 
         function checkHistory() {
             var xmlhttp = new XMLHttpRequest();

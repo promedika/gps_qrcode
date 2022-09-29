@@ -19,12 +19,14 @@
     $_GET['outlet'] = explode('|',$_GET['outlet'])[0];
     
     // Tulis ke tbl_history
-    $lastNumber = $_GET['nomor']+$_GET['kuantitas'];
+    $lastNumber = ($_GET['nomor']+$_GET['kuantitas'])-1;
     $sql = "INSERT INTO tbl_history (th_tbl_rs_tr_id, th_no, th_date)
             VALUES ('".$_GET['outlet']."', '".$lastNumber."', '".date("Y-m-d h:i:s")."')";
-   print_r($_GET['outlet']);  
+   
     try {
         mysqli_query($conn,"UPDATE tbl_rs SET tr_id='".$_GET['outlet']."', tr_code='".$lastNumber."' WHERE tr_id='".$_GET['outlet']."'");
+
+        mysqli_query($conn,$sql);
     } catch (\Throwable $th) {
         print_r(
             $th->getMessage()
