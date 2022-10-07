@@ -20,8 +20,8 @@
     
     // Tulis ke tbl_history
     $lastNumber = ($_GET['nomor']+$_GET['kuantitas'])-1;
-    $sql = "INSERT INTO tbl_history (th_tbl_rs_tr_id, th_no, th_date)
-            VALUES ('".$_GET['outlet']."', '".$lastNumber."', '".date("Y-m-d h:i:s")."')";
+    $sql = "INSERT INTO tbl_history (th_tbl_rs_tr_id, th_no, th_date,th_jumlah,th_requestby)
+            VALUES ('".$_GET['outlet']."', '".$lastNumber."', '".date("Y-m-d h:i:s")."','".$_GET['kuantitas']."','".$_GET['requestby']."')";
    
     try {
         mysqli_query($conn,"UPDATE tbl_rs SET tr_id='".$_GET['outlet']."', tr_code='".$lastNumber."' WHERE tr_id='".$_GET['outlet']."'");

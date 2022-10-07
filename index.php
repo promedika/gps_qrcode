@@ -87,6 +87,7 @@
     <div class="main">
         <div class="container">
         <a href="listoutlet.php"class="btn btn-warning" style="color: #ffffff;background-color: #ff8e3c;">Menu Outlet</a>
+        <a href="history.php"class="btn btn-warning" style="color: #ffffff;background-color: #ff8e3c;">History</a>
             <img class="logo mb-3" src="logo.jpg">          
                 <form id="qrForm" target="_blank" action="printtest.php" method="post">
                 <div class="row mb-3">
@@ -123,6 +124,14 @@
                         <input type="number" value="1" min="1" id="inputKuantitas" name="kuantitas" class="form-control">
                     </div>
                 </div>
+                <div class="row mb-3">
+                    <div class="col-md-4 flex-label">
+                        <label for="requestby">Nama Pemohon</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" name="requestby" id="inputrequestby" class="form-control">
+                    </div>
+                </div>
                 <div id="lastHistory" class="form-text mb-3">
                 </div>
                 <button class="btn btn-gps">
@@ -143,7 +152,7 @@
                     var resp = JSON.parse(this.responseText);
                     var d = new Date(resp.th_date);
                     var date = days[d.getDay()]+", "+d.getDate()+" "+months[(d.getMonth())]+" "+d.getFullYear()+" "+("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
-                    document.getElementById("lastHistory").innerHTML = "Last generate: "+resp.tr_name+" - "+resp.th_no+" - "+date;
+                    document.getElementById("lastHistory").innerHTML = "Last generate: "+resp.tr_name+" - "+resp.th_no+" - "+date+" - "+resp.th_jumlah+" - "+resp.th_requestby;
                 }
             }
             xmlhttp.open("GET", "get-history.php?", true);
@@ -157,7 +166,7 @@
                     checkHistory();
                 }
             }
-            xhr.open("POST", "send-history.php?outlet="+document.getElementById("inputNama").value+"&nomor="+document.getElementById("inputNomor").value+"&kuantitas="+document.getElementById("inputKuantitas").value, true);
+            xhr.open("POST", "send-history.php?outlet="+document.getElementById("inputNama").value+"&nomor="+document.getElementById("inputNomor").value+"&kuantitas="+document.getElementById("inputKuantitas").value+"&requestby="+document.getElementById("inputrequestby").value, true);
             xhr.send();
         }
 
