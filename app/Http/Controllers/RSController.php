@@ -23,7 +23,7 @@ class RSController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'tr_id'=>'required|unique:tenants|tr_id',
+            'tr_id'=>'required|unique:tenants',
             'tr_name'=>'required',
         ]);
 
