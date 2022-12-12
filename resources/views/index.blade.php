@@ -56,7 +56,7 @@
                         <label for="outlet">Nama Outlet</label>
                     </div>
                     <div class="col-md-8">
-                        <select id="inputNama" class="form-control" name="outlet">
+                        <select id="inputNama" class="form-control" name="outlet" required>
                             <option></option> 
                             <?php 
                             foreach ($tenants as $key => $value) {
@@ -74,7 +74,7 @@
                         <label for="nomor">Kode</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="number" name="nomor" id="inputNomor" class="form-control">
+                        <input type="number" name="nomor" id="inputNomor" class="form-control" required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -82,7 +82,7 @@
                         <label for="kuantitas">Jumlah</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="number" value="1" min="1" id="inputKuantitas" name="kuantitas" class="form-control">
+                        <input type="number" value="1" min="1" id="inputKuantitas" name="kuantitas" class="form-control" required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -90,7 +90,7 @@
                         <label for="requestby">Nama Pemohon</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" name="requestby" id="inputrequestby" class="form-control">
+                        <input type="text" name="requestby" id="inputrequestby" class="form-control" required>
                     </div>
                 </div>
                 <div id="lastHistory" class="form-text mb-3">
