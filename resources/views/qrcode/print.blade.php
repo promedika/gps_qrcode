@@ -72,7 +72,7 @@
                                     <span class='description'>
                                         {{$_POST['nama']}}
                                         <br>
-                                        {{$numberIncrement}}</span>
+                                        {{$_POST['outlet'].$numberIncrement}}</span>
                                 </div>
                             </div>
                         </div>
